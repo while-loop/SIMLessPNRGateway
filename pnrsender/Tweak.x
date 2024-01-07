@@ -3,7 +3,6 @@
 #import <SpringBoard/SpringBoard.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <MRYIPCCenter.h>
 
 #import "Tweak.h"
 #import "dlfcn.h"
@@ -235,21 +234,21 @@ MSHook(int, _CTServerConnectionIsUserIdentityModuleRequired, void* arg1, void* a
             NSLog(@"PNRGateway: MRYIPC center does not exist, creating...");
 
             NSLog(@"PNRGateway: Setting up the MRYIPCCenter");
-            MRYIPCCenter* center = [MRYIPCCenter centerNamed:@"dev.altavision.SIMLessPNR"];
-            NSLog(@"PNRGateway: MRYIPCCenter is %@", center);
+            // IPC-OFF MRYIPCCenter* center = [MRYIPCCenter centerNamed:@"dev.altavision.SIMLessPNR"];
+            // IPC-OFF NSLog(@"PNRGateway: MRYIPCCenter is %@", center);
 
-            [center addTarget:^id(NSArray *responseData) {
-                // Runs emulateReceivedResponsePNR when data is received via IPC
-                NSLog(@"PNRGateway: IPC center test success!!");
-                NSLog(@"PNRGateway: State machine reference: %@", self);
-                NSLog(@"PNRGateway: Response data is %@", responseData);
-                [self emulateReceivedResponsePNR:responseData];
+            // IPC-OFF [center addTarget:^id(NSArray *responseData) {
+            // IPC-OFF     // Runs emulateReceivedResponsePNR when data is received via IPC
+            // IPC-OFF     NSLog(@"PNRGateway: IPC center test success!!");
+            // IPC-OFF     NSLog(@"PNRGateway: State machine reference: %@", self);
+            // IPC-OFF     NSLog(@"PNRGateway: Response data is %@", responseData);
+            // IPC-OFF     [self emulateReceivedResponsePNR:responseData];
+            // IPC-OFF 
+            // IPC-OFF     return nil;
+            // IPC-OFF } forSelector:@selector(performResponse:)];
 
-                return nil;
-            } forSelector:@selector(performResponse:)];
 
-
-            objc_setAssociatedObject(instance, &"HasSetUpMRYIPC", center, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+            // IPC-OFF objc_setAssociatedObject(instance, &"HasSetUpMRYIPC", center, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         }
 
 
